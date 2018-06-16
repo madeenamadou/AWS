@@ -1,0 +1,43 @@
+yum -y install python-pip && \
+pip install --upgrade pip && \
+yum -y install groff && \
+pip install awscli
+aws configure
+
+touch -f ~/.aws/config && \
+touch -f ~/.aws/credentials
+aws_id=AKIAIEXJLIHTGANS5LFQ && \
+aws_key=lfK5LYPUu7yAZepRMDLB4iZxHeE1Z3L3Zfh1baFW && \
+shopt -s xpg_echo && \
+echo "[default]\noutput = json\nregion = ca-central-1" > ~/.aws/config && \
+echo "aws_access_key_id = ${aws_id}\naws_secret_access_key = ${aws_key}" > ~/.aws/credentials && \
+aws_id= && \
+aws_key=
+
+#aws_access_key_id = AKIAIEXJLIHTGANS5LFQ
+#aws_secret_access_key = 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
+
+aws s3 ls
+aws s3 cp/mv/rm wc.r s3://madeen001/
+aws s3 mb/rb s3://madeen002/
+
+
+aws iam create-group --group-name rh
+aws iam create-user --user-name paul
+aws iam add-user-to-group --user-name paul --group-name rh
+
+
+#EC2 instance
+chmod 400 madeen001.pem
+ssh -i "madeen001.pem" ec2-user@ec2-52-60-137-110.ca-central-1.compute.amazonaws.com
+
+
+
+
+#dropbox
+wget http://www.dropbox.com/download?dl=packages/dropbox.py && \
+mv download?*dropbox.py /usr/bin/dropbox.py && \
+chmod 0700 /usr/bin/dropbox.py && \
+chmod +x /usr/bin/dropbox.py
+dropbox.py start -i
+
